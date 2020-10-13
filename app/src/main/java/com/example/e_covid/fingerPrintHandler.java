@@ -2,6 +2,8 @@ package com.example.e_covid;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import androidx.appcompat.app.AppCompatActivity;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.Build;
 import android.os.CancellationSignal;
@@ -37,17 +39,18 @@ public class fingerPrintHandler extends FingerprintManager.AuthenticationCallbac
     @Override
     public void onAuthenticationSucceeded(FingerprintManager.AuthenticationResult result) {
         super.onAuthenticationSucceeded(result);
-        this.notif("Autentikasi sukses");
+        this.notif("Autentikasi sukses"+result);
+        this.context.startActivity(new Intent(this.context,register.class));
     }
 
     @Override
     public void onAuthenticationFailed() {
         super.onAuthenticationFailed();
         this.notif("Autentikasi gagal");
+        this.context.startActivity(new Intent(this.context,login.class));
     }
     private void notif(String s){
         TextView label = (TextView)((Activity)context).findViewById(R.id.notif_finger_print_auth);
-
         label.setText(s);
     }
 }

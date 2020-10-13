@@ -7,6 +7,7 @@ import androidx.core.content.ContextCompat;
 import android.Manifest;
 import android.annotation.TargetApi;
 import android.app.KeyguardManager;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.Build;
@@ -15,6 +16,7 @@ import android.security.keystore.KeyGenParameterSpec;
 import android.security.keystore.KeyPermanentlyInvalidatedException;
 import android.security.keystore.KeyProperties;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.IOException;
 import java.security.InvalidAlgorithmParameterException;
@@ -70,7 +72,6 @@ public class fingerPrintauth extends AppCompatActivity {
                     FingerprintManager.CryptoObject cryptoObject = new FingerprintManager.CryptoObject(cipher);
                     fingerPrintHandler fingerprintHandler = new fingerPrintHandler(this);
                     fingerprintHandler.startAuth(fingerprintManager, cryptoObject);
-
                 }
             }
         }

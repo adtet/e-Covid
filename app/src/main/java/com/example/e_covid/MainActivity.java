@@ -6,6 +6,7 @@ import androidx.core.content.ContextCompat;
 import android.Manifest;
 import android.accessibilityservice.FingerprintGestureController;
 import android.app.KeyguardManager;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.Build;
@@ -22,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        startActivity(new Intent(getApplicationContext(),fingerPrintauth.class));
 
     }
 }
