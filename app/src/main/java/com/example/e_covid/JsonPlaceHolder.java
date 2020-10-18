@@ -5,6 +5,7 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 
 public interface JsonPlaceHolder {
 
@@ -12,4 +13,6 @@ public interface JsonPlaceHolder {
     Call<loginPost>getloginPost(@Body loginPost loginPost);
     @POST("regist")
     Call<registPost>getregistPost(@Body registPost registPost);
+    @POST("{id}")
+    Call<absenPost>getabsenPost(@Path("id") String getPath);
 }

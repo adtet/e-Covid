@@ -33,18 +33,23 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         if(ins==-1)return false;
         else return true;
     }
-    public String id(String a){
+    public String ambil_id(){
         SQLiteDatabase read = this.getReadableDatabase();
-        Cursor cursor = read.rawQuery("select * from data_id where id=?",new String[]{a});
+        Cursor cursor = read.rawQuery("select * from data_id" ,null);
         String c = null;
-        cursor.moveToFirst();
+        cursor.moveToLast();
         if(cursor.getCount()>0){
-            c = cursor.getString(1).toString();
+            c = cursor.getString(0).toString();
             return c;
         }
         else
             return null;
     }
+    public Integer delete(String a){
+        SQLiteDatabase read = this.getReadableDatabase();
+        return read.delete("data_id","id=?",new String[]{a});
+    }
+
 
 
 }
