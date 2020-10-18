@@ -40,14 +40,14 @@ public class fingerPrintHandler extends FingerprintManager.AuthenticationCallbac
     public void onAuthenticationSucceeded(FingerprintManager.AuthenticationResult result) {
         super.onAuthenticationSucceeded(result);
         this.notif("Autentikasi sukses"+result);
-        this.context.startActivity(new Intent(this.context,register.class));
+
     }
 
     @Override
     public void onAuthenticationFailed() {
         super.onAuthenticationFailed();
         this.notif("Autentikasi gagal");
-        this.context.startActivity(new Intent(this.context,login.class));
+
     }
     private void notif(String s){
         TextView label = (TextView)((Activity)context).findViewById(R.id.notif_finger_print_auth);

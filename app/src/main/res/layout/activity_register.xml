@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -10,9 +10,109 @@
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="124dp"
-        android:layout_marginTop="220dp"
-        android:text="Dapat link kelas"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="153dp"
+        android:layout_marginTop="40dp"
+        android:text="Register"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+    <EditText
+        android:id="@+id/txtnimregister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="72dp"
+        android:layout_marginTop="81dp"
+        android:ems="10"
+        android:hint="nim"
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/txtnamaregister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="73dp"
+        android:layout_marginTop="138dp"
+        android:ems="10"
+        android:hint="nama"
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/txtjurusanregister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="72dp"
+        android:layout_marginTop="195dp"
+        android:ems="10"
+        android:hint="jurusan"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/txtprodiregsiter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="74dp"
+        android:layout_marginTop="252dp"
+        android:ems="10"
+        android:hint="prodi"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/txtemailregister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="74dp"
+        android:layout_marginTop="363dp"
+        android:ems="10"
+        android:hint="email"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/txtpassregister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="75dp"
+        android:layout_marginTop="422dp"
+        android:ems="10"
+        android:hint="password"
+        android:inputType="textPersonName" />
+
+    <Button
+        android:id="@+id/btnprosesregister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="200dp"
+        android:layout_marginTop="476dp"
+        android:text="Proses" />
+
+    <EditText
+        android:id="@+id/txtkelasregister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="72dp"
+        android:layout_marginTop="307dp"
+        android:ems="10"
+        android:hint="kelas"
+        android:inputType="textPersonName" />
+</RelativeLayout>

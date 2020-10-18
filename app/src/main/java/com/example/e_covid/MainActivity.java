@@ -11,6 +11,9 @@ import android.content.pm.PackageManager;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import java.security.KeyStore;
@@ -18,12 +21,26 @@ import java.security.KeyStore;
 import javax.crypto.Cipher;
 
 public class MainActivity extends AppCompatActivity {
-
+    Button login,regist;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        startActivity(new Intent(getApplicationContext(),fingerPrintauth.class));
+        login = findViewById(R.id.btnloginmain);
+        regist = findViewById(R.id.btnregistmain);
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, login.class));
+
+            }
+        });
+        regist.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this,register.class));
+            }
+        });
 
     }
 }
