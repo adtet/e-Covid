@@ -55,6 +55,8 @@ public class login extends AppCompatActivity {
                             Toast.makeText(getApplicationContext(),"ID : "+a+" berhasil Login",Toast.LENGTH_LONG).show();
                             email.setText("");
                             pass.setText("");
+                            startActivity(new Intent(login.this,fingerPrintauth.class));
+                            finish();
                         }
                         else{
                             Toast.makeText(getApplicationContext(),"LOL",Toast.LENGTH_LONG).show();

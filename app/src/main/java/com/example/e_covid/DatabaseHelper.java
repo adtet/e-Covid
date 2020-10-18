@@ -37,13 +37,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase read = this.getReadableDatabase();
         Cursor cursor = read.rawQuery("select * from data_id" ,null);
         String c = null;
-        cursor.moveToLast();
+        cursor.moveToFirst();
         if(cursor.getCount()>0){
-            c = cursor.getString(0).toString();
+            c = cursor.getString(0);
             return c;
         }
         else
-            return null;
+            return c;
     }
     public Integer delete(String a){
         SQLiteDatabase read = this.getReadableDatabase();

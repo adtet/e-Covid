@@ -72,6 +72,7 @@ public class fingerPrintauth extends AppCompatActivity {
                     FingerprintManager.CryptoObject cryptoObject = new FingerprintManager.CryptoObject(cipher);
                     fingerPrintHandler fingerprintHandler = new fingerPrintHandler(this);
                     fingerprintHandler.startAuth(fingerprintManager, cryptoObject);
+
                 }
             }
         }
@@ -128,5 +129,11 @@ public class fingerPrintauth extends AppCompatActivity {
         } catch (KeyStoreException | CertificateException | UnrecoverableKeyException | IOException | NoSuchAlgorithmException | InvalidKeyException e) {
             throw new RuntimeException("Gagal inisiasi Cipher", e);
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
     }
 }

@@ -3,7 +3,6 @@ package com.example.e_covid;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import androidx.appcompat.app.AppCompatActivity;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.Build;
 import android.os.CancellationSignal;
@@ -19,8 +18,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 @RequiresApi(api = Build.VERSION_CODES.M)
 public class fingerPrintHandler extends FingerprintManager.AuthenticationCallback {
-    DatabaseHelper db;
-    String url = "http://156.67.221.101:4000/user/absen/";
+
+
     private Context context;
     public fingerPrintHandler(Context context){
         this.context = context;
@@ -47,27 +46,8 @@ public class fingerPrintHandler extends FingerprintManager.AuthenticationCallbac
     public void onAuthenticationSucceeded(FingerprintManager.AuthenticationResult result) {
         super.onAuthenticationSucceeded(result);
         this.notif("Autentikasi sukses"+result);
-        String get_id = db.ambil_id();
-        final Retrofit retrofit = new Retrofit.Builder().baseUrl(url).addConverterFactory(GsonConverterFactory.create()).build();
-        JsonPlaceHolder jsonPlaceHolder = retrofit.create(JsonPlaceHolder.class);
-        final absenPost loginGet = new absenPost(get_id);
-        Call<absenPost>call = jsonPlaceHolder.getabsenPost(get_id);
-        call.enqueue(new Callback<absenPost>() {
-            @Override
-            public void onResponse(Call<absenPost> call, Response<absenPost> response) {
-                absenPost absenPost = response.body();
-                String x = absenPost.getLink();
-                TextView link = (TextView)((Activity)context).findViewById(R.id.txtlinkmasukkelas);
-                link.setText(x);
-                launch();
-            }
-
-            @Override
-            public void onFailure(Call<absenPost> call, Throwable t) {
-
-            }
-        });
-
+        launch();
+//        finish();
     }
 
     @Override
@@ -83,4 +63,8 @@ public class fingerPrintHandler extends FingerprintManager.AuthenticationCallbac
     private void launch(){
         this.context.startActivity(new Intent(this.context,masuk_kelas.class));
     }
+    private void finish(){
+        this.finish();
+    }
+
 }
