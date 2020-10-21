@@ -21,26 +21,10 @@ import java.security.KeyStore;
 import javax.crypto.Cipher;
 
 public class MainActivity extends AppCompatActivity {
-    Button login,regist;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        login = findViewById(R.id.btnloginmain);
-        regist = findViewById(R.id.btnregistmain);
-        login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, login.class));
-
-            }
-        });
-        regist.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this,register.class));
-            }
-        });
 
     }
 }

@@ -4,6 +4,7 @@ public class loginPost {
     public String email;
     public String password;
     public String id;
+    public String kelas;
 
     public loginPost(String Email,String Password){
         this.email = Email;
@@ -19,5 +20,9 @@ public class loginPost {
 
     public String getId() {
         return id;
+    }
+
+    public String getKelas() {
+        return kelas;
     }
 }

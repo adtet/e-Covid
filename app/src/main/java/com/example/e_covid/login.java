@@ -50,7 +50,8 @@ public class login extends AppCompatActivity {
                         }
                         loginPost loginPost1 = response.body();
                         String a = loginPost1.getId();
-                        Boolean ins = db.insert1(a,email.getText().toString());
+                        String b = loginPost1.getKelas();
+                        Boolean ins = db.insert1(a,email.getText().toString(),b);
                         if(ins==true){
                             Toast.makeText(getApplicationContext(),"ID : "+a+" berhasil Login",Toast.LENGTH_LONG).show();
                             email.setText("");
@@ -76,5 +77,47 @@ public class login extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         finish();
+    }
+    public void get_jadwal(String a, String b){
+        final Retrofit retrofit = new Retrofit.Builder().baseUrl(url).addConverterFactory(GsonConverterFactory.create()).build();
+        db = new DatabaseHelper(this);
+        JsonPlaceHolder jsonPlaceHolder = retrofit.create(JsonPlaceHolder.class);
+        final jadwalPost jadwalPost = new jadwalPost(a);
+        Call<List<jadwalGet>> call = jsonPlaceHolder.getjadwalGet(a,jadwalPost);
+        call.enqueue(new Callback<List<jadwalGet>>() {
+            @Override
+            public void onResponse(Call<List<jadwalGet>> call, Response<List<jadwalGet>> response) {
+                if(!response.isSuccessful()){
+                    Toast.makeText(getApplicationContext(),"Code : "+response.code(),Toast.LENGTH_LONG).show();
+                    return;
+                }
+                List<jadwalGet> jadwalGets = response.body();
+                if (jadwalGets.isEmpty()){
+                    Toast.makeText(getApplicationContext(),"Jadwal Kosong",Toast.LENGTH_LONG).show();
+                }
+                else{
+                    for(jadwalGet jadwalGet:jadwalGets){
+                        String a = null;
+                        String b = null;
+                        String c = null;
+                        String d = null;
+                        String e = null;
+                        String f = null;
+                        a = jadwalGet.getJamstart();
+                        b = jadwalGet.getMenitstart();
+                        c = jadwalGet.getJamend();
+                        d = jadwalGet.getMenitend();
+                        e = jadwalGet.getMatakuliah();
+                        f = jadwalGet.getDosen();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<jadwalGet>> call, Throwable t) {
+
+            }
+        });
+
     }
 }

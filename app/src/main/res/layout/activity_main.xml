@@ -11,8 +11,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="157dp"
-        android:layout_marginTop="119dp"
+        android:layout_marginStart="158dp"
+        android:layout_marginTop="214dp"
         android:text="E-covid"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -20,24 +20,13 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.209" />
 
-    <Button
-        android:id="@+id/btnloginmain"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="136dp"
-        android:layout_marginTop="255dp"
-        android:text="Login" />
-
-    <Button
-        android:id="@+id/btnregistmain"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="129dp"
-        android:layout_marginTop="360dp"
-        android:text="Registrasi" />
+<!--    <View-->
+<!--        android:layout_width="0.393701in"-->
+<!--        android:layout_height="0.393701in"-->
+<!--        android:layout_alignParentStart="true"-->
+<!--        android:layout_alignParentTop="true"-->
+<!--        android:layout_marginStart="148dp"-->
+<!--        android:layout_marginTop="272dp"-->
+<!--        android:background="@color/colorPrimaryDark" />-->
 
 </RelativeLayout>
