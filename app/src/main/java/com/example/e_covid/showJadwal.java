@@ -34,7 +34,7 @@ public class showJadwal extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
-        adapter = new RecyclerViewAdapter(timestartList,timeendList,matakuliahList,dosenList);
+        adapter = new RecyclerViewAdapter(timestartList,timeendList,matakuliahList,dosenList,this);
         recyclerView.setAdapter(adapter);
 
     }

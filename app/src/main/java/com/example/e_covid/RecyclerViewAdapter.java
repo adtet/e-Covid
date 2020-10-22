@@ -1,8 +1,11 @@
 package com.example.e_covid;
 
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -15,21 +18,24 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     private ArrayList endList;
     private ArrayList matakuliahList;
     private ArrayList dosenList;
-    RecyclerViewAdapter(ArrayList startList,ArrayList endList,ArrayList matakuliahList,ArrayList dosenList){
+    Context context;
+    RecyclerViewAdapter(ArrayList startList,ArrayList endList,ArrayList matakuliahList,ArrayList dosenList,Context context){
         this.startList = startList;
         this.endList = endList;
         this.matakuliahList = matakuliahList;
         this.dosenList = dosenList;
+        this.context = context;
     }
     class ViewHolder extends RecyclerView.ViewHolder{
         private TextView mstart,mend,mmatakuliah,mdosen;
-
+        RelativeLayout layoutShow;
         ViewHolder (View itemView){
             super(itemView);
             mstart = itemView.findViewById(R.id.startShowjadwal);
             mend = itemView.findViewById(R.id.endShowjadwal);
             mmatakuliah = itemView.findViewById(R.id.matakuliahShowjadwal);
             mdosen = itemView.findViewById(R.id.dosenShowjadwal);
+            layoutShow = itemView.findViewById(R.id.layoutShow);
         }
 
     }
@@ -50,6 +56,14 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         holder.mend.setText(end);
         holder.mmatakuliah.setText(matakuliah);
         holder.mdosen.setText(dosen);
+        holder.layoutShow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(context,masuk_kelas.class);
+                i.putExtra("start",start);
+                context.startActivity(i);
+            }
+        });
     }
 
     @Override
