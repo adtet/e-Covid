@@ -23,6 +23,7 @@ public class login extends AppCompatActivity {
     Button login;
     DatabaseHelper db;
     public String url = "http://156.67.221.101:4000/user/";
+    public String url1 = "http://156.67.221.101:4000/";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,7 +57,7 @@ public class login extends AppCompatActivity {
                             Toast.makeText(getApplicationContext(),"ID : "+a+" berhasil Login",Toast.LENGTH_LONG).show();
                             email.setText("");
                             pass.setText("");
-                            get_jadwal(a,b);
+                            get_jadwal(a);
                             startActivity(new Intent(login.this,showJadwal.class));
                             finish();
                         }
@@ -78,12 +79,12 @@ public class login extends AppCompatActivity {
         super.onBackPressed();
         finish();
     }
-    public void get_jadwal(String a, String b){
-        final Retrofit retrofit = new Retrofit.Builder().baseUrl(url).addConverterFactory(GsonConverterFactory.create()).build();
+    public void get_jadwal(String a){
+        final Retrofit retrofit = new Retrofit.Builder().baseUrl(url1).addConverterFactory(GsonConverterFactory.create()).build();
         db = new DatabaseHelper(this);
         JsonPlaceHolder jsonPlaceHolder = retrofit.create(JsonPlaceHolder.class);
         final jadwalPost jadwalPost = new jadwalPost(a);
-        Call<List<jadwalGet>> call = jsonPlaceHolder.getjadwalGet(a,jadwalPost);
+        Call<List<jadwalGet>> call = jsonPlaceHolder.getjadwalGet(jadwalPost);
         call.enqueue(new Callback<List<jadwalGet>>() {
             @Override
             public void onResponse(Call<List<jadwalGet>> call, Response<List<jadwalGet>> response) {
