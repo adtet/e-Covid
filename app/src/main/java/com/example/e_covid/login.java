@@ -56,14 +56,14 @@ public class login extends AppCompatActivity {
                             Toast.makeText(getApplicationContext(),"ID : "+a+" berhasil Login",Toast.LENGTH_LONG).show();
                             email.setText("");
                             pass.setText("");
-                            startActivity(new Intent(login.this,fingerPrintauth.class));
+                            get_jadwal(a,b);
+                            startActivity(new Intent(login.this,showJadwal.class));
                             finish();
                         }
                         else{
                             Toast.makeText(getApplicationContext(),"LOL",Toast.LENGTH_LONG).show();
                         }
                     }
-
                     @Override
                     public void onFailure(Call<com.example.e_covid.loginPost> call, Throwable t) {
                         Toast.makeText(getApplicationContext(),"Failed POST",Toast.LENGTH_LONG).show();
@@ -109,13 +109,22 @@ public class login extends AppCompatActivity {
                         d = jadwalGet.getMenitend();
                         e = jadwalGet.getMatakuliah();
                         f = jadwalGet.getDosen();
+                        Boolean check = db.check_jadwal(e,f);
+                        if(check==true){
+                            String timestart = a+":"+b;
+                            String timeend = c+":"+d;
+                            db.insert_jadwal(timestart,timeend,e,f);
+                        }
+                        else{
+                            Toast.makeText(getApplicationContext(),"jadwal sudah tersedia",Toast.LENGTH_LONG).show();
+                        }
                     }
+                    Toast.makeText(getApplicationContext(),"download jadwal berhasil",Toast.LENGTH_LONG).show();
                 }
             }
-
             @Override
             public void onFailure(Call<List<jadwalGet>> call, Throwable t) {
-
+                Toast.makeText(getApplicationContext(),"download failed",Toast.LENGTH_LONG).show();
             }
         });
 

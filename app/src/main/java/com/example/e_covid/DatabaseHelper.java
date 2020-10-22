@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.os.strictmode.SqliteObjectLeakedViolation;
 
 import androidx.annotation.Nullable;
 
@@ -66,6 +67,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public Integer delete_jadwal(){
         SQLiteDatabase db = this.getWritableDatabase();
         return db.delete("jadwal",null,null);
+    }
+    public Boolean check_jadwal(String a,String b){
+        SQLiteDatabase db =  this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("select * from jadwal where matakuliah=? and dosen=?",new String[]{a,b});
+        if(cursor.getCount()>0){
+            return false;
+        }
+        else{
+            return true;
+        }
+
+
     }
 
 
