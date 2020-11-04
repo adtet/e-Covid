@@ -2,5 +2,8 @@
 <resources>
     <array name="preloaded_fonts" translatable="false">
         <item>@font/comfortaa_bold</item>
+        <item>@font/krona_one</item>
+        <item>@font/open_sans_bold</item>
+        <item>@font/open_sans_italic</item>
     </array>
 </resources>

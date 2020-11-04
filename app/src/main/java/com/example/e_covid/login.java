@@ -25,7 +25,7 @@ public class login extends AppCompatActivity {
     DatabaseHelper db;
     ProgressBar progressBar;
     public String url = "http://156.67.221.101:4000/user/";
-    public String url1 = "http://156.67.221.101:4000/";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,100 +39,55 @@ public class login extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                progressBar.setVisibility(View.VISIBLE);
-                JsonPlaceHolder jsonPlaceHolder = retrofit.create(JsonPlaceHolder.class);
-                final loginPost loginPost = new loginPost(email.getText().toString(),pass.getText().toString());
-                Call<loginPost>call = jsonPlaceHolder.getloginPost(loginPost);
-                call.enqueue(new Callback<com.example.e_covid.loginPost>() {
-                    @Override
-                    public void onResponse(Call<com.example.e_covid.loginPost> call, Response<com.example.e_covid.loginPost> response) {
+                if(email.getText().equals("")&&pass.getText().equals("")){
+                    Toast.makeText(getApplicationContext(),"Lengkapi data anda",Toast.LENGTH_LONG).show();
+                }
+                else{
+                    progressBar.setVisibility(View.VISIBLE);
+                    JsonPlaceHolder jsonPlaceHolder = retrofit.create(JsonPlaceHolder.class);
+                    final loginPost loginPost = new loginPost(email.getText().toString(),pass.getText().toString());
+                    Call<loginPost>call = jsonPlaceHolder.getloginPost(loginPost);
+                    call.enqueue(new Callback<com.example.e_covid.loginPost>() {
+                        @Override
+                        public void onResponse(Call<com.example.e_covid.loginPost> call, Response<com.example.e_covid.loginPost> response) {
 
 //                        Toast.makeText(getApplicationContext(),"post berhasil",Toast.LENGTH_LONG).show();
-                        if(!response.isSuccessful()){
-                            Toast.makeText(getApplicationContext(),"Code : "+response.code(),Toast.LENGTH_SHORT).show();
-                            return;
-                        }
-                        loginPost loginPost1 = response.body();
-                        String a = loginPost1.getId();
-                        String b = loginPost1.getKelas();
-                        Boolean ins = db.insert1(a,email.getText().toString(),b);
-                        if(ins==true){
+                            if(!response.isSuccessful()){
+                                Toast.makeText(getApplicationContext(),"Code : "+response.code(),Toast.LENGTH_SHORT).show();
+                                return;
+                            }
+                            loginPost loginPost1 = response.body();
+                            String a = loginPost1.getId();
+                            String b = loginPost1.getKelas();
+                            Boolean ins = db.insert1(a,email.getText().toString(),b);
+                            if(ins==true){
 //                            Toast.makeText(getApplicationContext(),"ID : "+a+" berhasil Login",Toast.LENGTH_LONG).show();
-                            email.setText("");
-                            pass.setText("");
-                            get_jadwal(a);
+                                email.setText("");
+                                pass.setText("");
+//                            get_jadwal(a);
+                                progressBar.setVisibility(View.GONE);
+                                startActivity(new Intent(login.this,fingerPrintauth.class));
+                                finish();
+                            }
+                            else{
+                                Toast.makeText(getApplicationContext(),"LOL",Toast.LENGTH_LONG).show();
+                            }
+                        }
+                        @Override
+                        public void onFailure(Call<com.example.e_covid.loginPost> call, Throwable t) {
                             progressBar.setVisibility(View.GONE);
-                            startActivity(new Intent(login.this,showJadwal.class));
-                            finish();
+                            Toast.makeText(getApplicationContext(),"Failed POST",Toast.LENGTH_LONG).show();
                         }
-                        else{
-                            Toast.makeText(getApplicationContext(),"LOL",Toast.LENGTH_LONG).show();
-                        }
-                    }
-                    @Override
-                    public void onFailure(Call<com.example.e_covid.loginPost> call, Throwable t) {
-                        progressBar.setVisibility(View.GONE);
-                        Toast.makeText(getApplicationContext(),"Failed POST",Toast.LENGTH_LONG).show();
-                    }
-                });
-            }
+                    });
+                }
+                }
+
         });
     }
-
     @Override
     public void onBackPressed() {
         super.onBackPressed();
         finish();
     }
-    public void get_jadwal(String a){
-        final Retrofit retrofit = new Retrofit.Builder().baseUrl(url1).addConverterFactory(GsonConverterFactory.create()).build();
-        db = new DatabaseHelper(this);
-        JsonPlaceHolder jsonPlaceHolder = retrofit.create(JsonPlaceHolder.class);
-        final jadwalPost jadwalPost = new jadwalPost(a);
-        Call<List<jadwalGet>> call = jsonPlaceHolder.getjadwalGet(jadwalPost);
-        call.enqueue(new Callback<List<jadwalGet>>() {
-            @Override
-            public void onResponse(Call<List<jadwalGet>> call, Response<List<jadwalGet>> response) {
-                if(!response.isSuccessful()){
-                    Toast.makeText(getApplicationContext(),"Code : "+response.code(),Toast.LENGTH_LONG).show();
-                    return;
-                }
-                List<jadwalGet> jadwalGets = response.body();
-                if (jadwalGets.isEmpty()){
-                    Toast.makeText(getApplicationContext(),"Jadwal Kosong",Toast.LENGTH_LONG).show();
-                }
-                else{
-                    for(jadwalGet jadwalGet:jadwalGets){
-                        String a = null;
-                        String b = null;
-                        String c = null;
-                        String d = null;
-                        String e = null;
-                        String f = null;
-                        a = jadwalGet.getJamstart();
-                        b = jadwalGet.getMenitstart();
-                        c = jadwalGet.getJamend();
-                        d = jadwalGet.getMenitend();
-                        e = jadwalGet.getMatakuliah();
-                        f = jadwalGet.getDosen();
-                        Boolean check = db.check_jadwal(e,f);
-                        if(check==true){
-                            String timestart = a+":"+b;
-                            String timeend = c+":"+d;
-                            db.insert_jadwal(timestart,timeend,e,f);
-                        }
-                        else{
-                            Toast.makeText(getApplicationContext(),"jadwal sudah tersedia",Toast.LENGTH_LONG).show();
-                        }
-                    }
-                    Toast.makeText(getApplicationContext(),"download jadwal berhasil",Toast.LENGTH_LONG).show();
-                }
-            }
-            @Override
-            public void onFailure(Call<List<jadwalGet>> call, Throwable t) {
-                Toast.makeText(getApplicationContext(),"download failed",Toast.LENGTH_LONG).show();
-            }
-        });
 
-    }
 }

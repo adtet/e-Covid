@@ -7,8 +7,11 @@ import android.hardware.fingerprint.FingerprintManager;
 import android.os.Build;
 import android.os.CancellationSignal;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -21,6 +24,8 @@ public class fingerPrintHandler extends FingerprintManager.AuthenticationCallbac
 
 
     private Context context;
+    private DatabaseHelper db;
+    private String url1 = "http://156.67.221.101:4000/";
     public fingerPrintHandler(Context context){
         this.context = context;
     }
@@ -46,8 +51,11 @@ public class fingerPrintHandler extends FingerprintManager.AuthenticationCallbac
     public void onAuthenticationSucceeded(FingerprintManager.AuthenticationResult result) {
         super.onAuthenticationSucceeded(result);
         this.notif("Autentikasi sukses"+result);
+        db = new DatabaseHelper(this.context);
+        String id = db.ambil_id();
+        get_jadwal(id);
         launch();
-//        finish();
+
     }
 
     @Override
@@ -61,10 +69,61 @@ public class fingerPrintHandler extends FingerprintManager.AuthenticationCallbac
         label.setText(s);
     }
     private void launch(){
-        this.context.startActivity(new Intent(this.context,masuk_kelas.class));
+        this.context.startActivity(new Intent(this.context,showJadwal.class));
     }
     private void finish(){
         this.finish();
+    }
+    public void get_jadwal(String a){
+        final Retrofit retrofit = new Retrofit.Builder().baseUrl(url1).addConverterFactory(GsonConverterFactory.create()).build();
+        db = new DatabaseHelper(this.context);
+        JsonPlaceHolder jsonPlaceHolder = retrofit.create(JsonPlaceHolder.class);
+        final jadwalPost jadwalPost = new jadwalPost(a);
+        Call<List<jadwalGet>> call = jsonPlaceHolder.getjadwalGet(jadwalPost);
+        call.enqueue(new Callback<List<jadwalGet>>() {
+            @Override
+            public void onResponse(Call<List<jadwalGet>> call, Response<List<jadwalGet>> response) {
+                if(!response.isSuccessful()){
+                    Toast.makeText(context,"Code : "+response.code(),Toast.LENGTH_LONG).show();
+                    return;
+                }
+                List<jadwalGet> jadwalGets = response.body();
+                if (jadwalGets.isEmpty()){
+                    Toast.makeText(context,"Jadwal Kosong",Toast.LENGTH_LONG).show();
+                }
+                else{
+                    for(jadwalGet jadwalGet:jadwalGets){
+                        String a = null;
+                        String b = null;
+                        String c = null;
+                        String d = null;
+                        String e = null;
+                        String f = null;
+                        a = jadwalGet.getJamstart();
+                        b = jadwalGet.getMenitstart();
+                        c = jadwalGet.getJamend();
+                        d = jadwalGet.getMenitend();
+                        e = jadwalGet.getMatakuliah();
+                        f = jadwalGet.getDosen();
+                        Boolean check = db.check_jadwal(e,f);
+                        if(check==true){
+                            String timestart = a+":"+b;
+                            String timeend = c+":"+d;
+                            db.insert_jadwal(timestart,timeend,e,f);
+                        }
+                        else{
+                            Toast.makeText(context,"jadwal sudah tersedia",Toast.LENGTH_LONG).show();
+                        }
+                    }
+                    Toast.makeText(context,"download jadwal berhasil",Toast.LENGTH_LONG).show();
+                }
+            }
+            @Override
+            public void onFailure(Call<List<jadwalGet>> call, Throwable t) {
+                Toast.makeText(context,"download failed",Toast.LENGTH_LONG).show();
+            }
+        });
+
     }
 
 }
