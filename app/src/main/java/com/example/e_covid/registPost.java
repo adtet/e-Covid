@@ -8,7 +8,7 @@ public class registPost {
     public String kelas;
     public String email;
     public String password;
-
+    public String message;
     public registPost(String Nim,String Username,String Jurusan,String Prodi,String Kelas,String Email,String Password){
         this.nim = Nim;
         this.username = Username;
@@ -45,5 +45,9 @@ public class registPost {
 
     public String getPassword() {
         return password;
+    }
+
+    public String getMessage() {
+        return message;
     }
 }

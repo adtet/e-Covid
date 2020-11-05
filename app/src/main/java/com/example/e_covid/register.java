@@ -50,12 +50,15 @@ public class register extends AppCompatActivity {
                         String e = kelas.getText().toString();
                         String f = email.getText().toString();
                         String g = pass.getText().toString();
-                        registPost registPost = new registPost(a,b,c,d,e,f,g);
+                        final registPost registPost = new registPost(a,b,c,d,e,f,g);
                         Call<registPost> call = jsonPlaceHolder.getregistPost(registPost);
                         call.enqueue(new Callback<com.example.e_covid.registPost>() {
                             @Override
                             public void onResponse(Call<com.example.e_covid.registPost> call, Response<com.example.e_covid.registPost> response) {
                                 Toast.makeText(getApplicationContext(),"regist berhasil",Toast.LENGTH_LONG).show();
+                                registPost registPost1 = response.body();
+                                String pesan = registPost1.getMessage();
+                                Toast.makeText(getApplicationContext(),pesan,Toast.LENGTH_SHORT).show();
                                 nim.setText("");
                                 nama.setText("");
                                 prodi.setText("");

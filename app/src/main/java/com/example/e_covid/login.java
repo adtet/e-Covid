@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -70,13 +71,15 @@ public class login extends AppCompatActivity {
                             loginPost loginPost1 = response.body();
                             String a = loginPost1.getId();
                             String b = loginPost1.getKelas();
-                            if (a.equals("Null")){
+                            if (a==null){
                                 Toast.makeText(getApplicationContext(),"anda belum terdaftar",Toast.LENGTH_LONG).show();
+                                email.setText("");
+                                pass.setText("");
                             }
                             else{
                                 Boolean ins = db.insert1(a,email.getText().toString(),b);
                                 if(ins==true){
-                                    Toast.makeText(getApplicationContext(),"ID : "+a+" berhasil Login",Toast.LENGTH_LONG).show();
+//                                    Toast.makeText(getApplicationContext(),"ID : "+a+" berhasil Login",Toast.LENGTH_LONG).show();
                                     email.setText("");
                                     pass.setText("");
 //                            get_jadwal(a);

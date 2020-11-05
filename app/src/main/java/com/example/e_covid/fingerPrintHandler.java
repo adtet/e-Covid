@@ -53,10 +53,8 @@ public class fingerPrintHandler extends FingerprintManager.AuthenticationCallbac
         this.notif("Autentikasi sukses");
         db = new DatabaseHelper(this.context);
         String id = db.ambil_id();
-        Toast.makeText(context,id,Toast.LENGTH_LONG).show();
+//        Toast.makeText(context,id,Toast.LENGTH_LONG).show();
         get_jadwal(id);
-        launch();
-        ((fingerPrintauth)context).finish();
 
     }
 
@@ -82,49 +80,91 @@ public class fingerPrintHandler extends FingerprintManager.AuthenticationCallbac
         JsonPlaceHolder jsonPlaceHolder = retrofit.create(JsonPlaceHolder.class);
         final jadwalPost jadwalPost = new jadwalPost(a);
         Call<List<jadwalGet>> call = jsonPlaceHolder.getjadwalGet(jadwalPost);
-        call.enqueue(new Callback<List<jadwalGet>>() {
-            @Override
-            public void onResponse(Call<List<jadwalGet>> call, Response<List<jadwalGet>> response) {
-                if(!response.isSuccessful()){
-                    Toast.makeText(context,"Code : "+response.code(),Toast.LENGTH_LONG).show();
-                    return;
-                }
-                List<jadwalGet> jadwalGets = response.body();
-                if (jadwalGets.isEmpty()){
-                    Toast.makeText(context,"Jadwal Kosong",Toast.LENGTH_LONG).show();
-                }
-                else{
-                    for(jadwalGet jadwalGet:jadwalGets){
-                        String a = null;
-                        String b = null;
-                        String c = null;
-                        String d = null;
-                        String e = null;
-                        String f = null;
-                        a = jadwalGet.getJamstart();
-                        b = jadwalGet.getMenitstart();
-                        c = jadwalGet.getJamend();
-                        d = jadwalGet.getMenitend();
-                        e = jadwalGet.getMatakuliah();
-                        f = jadwalGet.getDosen();
-                        Boolean check = db.check_jadwal(e,f);
-                        if(check==true){
+        Boolean check = db.check_jadwal();
+        if(check==true){
+            call.enqueue(new Callback<List<jadwalGet>>() {
+                @Override
+                public void onResponse(Call<List<jadwalGet>> call, Response<List<jadwalGet>> response) {
+                    if(!response.isSuccessful()){
+                        Toast.makeText(context,"Code : "+response.code(),Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    List<jadwalGet> jadwalGets = response.body();
+                    if (jadwalGets.isEmpty()){
+//                        Toast.makeText(context,"Jadwal Kosong",Toast.LENGTH_SHORT).show();
+                    }
+                    else{
+                        for(jadwalGet jadwalGet:jadwalGets){
+                            String a = null;
+                            String b = null;
+                            String c = null;
+                            String d = null;
+                            String e = null;
+                            String f = null;
+                            a = jadwalGet.getJamstart();
+                            b = jadwalGet.getMenitstart();
+                            c = jadwalGet.getJamend();
+                            d = jadwalGet.getMenitend();
+                            e = jadwalGet.getMatakuliah();
+                            f = jadwalGet.getDosen();
                             String timestart = a+":"+b;
                             String timeend = c+":"+d;
                             db.insert_jadwal(timestart,timeend,e,f);
                         }
-                        else{
-                            Toast.makeText(context,"jadwal sudah tersedia",Toast.LENGTH_LONG).show();
-                        }
+//                        Toast.makeText(context,"download jadwal berhasil",Toast.LENGTH_SHORT).show();
+                        launch();
+                        ((fingerPrintauth)context).finish();
                     }
-                    Toast.makeText(context,"download jadwal berhasil",Toast.LENGTH_LONG).show();
                 }
-            }
-            @Override
-            public void onFailure(Call<List<jadwalGet>> call, Throwable t) {
-                Toast.makeText(context,"download failed",Toast.LENGTH_LONG).show();
-            }
-        });
+                @Override
+                public void onFailure(Call<List<jadwalGet>> call, Throwable t) {
+                    Toast.makeText(context,"download failed",Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+        else{
+            db.delete_jadwal();
+            call.enqueue(new Callback<List<jadwalGet>>() {
+                @Override
+                public void onResponse(Call<List<jadwalGet>> call, Response<List<jadwalGet>> response) {
+                    if(!response.isSuccessful()){
+                        Toast.makeText(context,"Code : "+response.code(),Toast.LENGTH_LONG).show();
+                        return;
+                    }
+                    List<jadwalGet> jadwalGets = response.body();
+                    if (jadwalGets.isEmpty()){
+//                        Toast.makeText(context,"Jadwal Kosong",Toast.LENGTH_LONG).show();
+                    }
+                    else{
+                        for(jadwalGet jadwalGet:jadwalGets){
+                            String a = null;
+                            String b = null;
+                            String c = null;
+                            String d = null;
+                            String e = null;
+                            String f = null;
+                            a = jadwalGet.getJamstart();
+                            b = jadwalGet.getMenitstart();
+                            c = jadwalGet.getJamend();
+                            d = jadwalGet.getMenitend();
+                            e = jadwalGet.getMatakuliah();
+                            f = jadwalGet.getDosen();
+                            String timestart = a+":"+b;
+                            String timeend = c+":"+d;
+                            db.insert_jadwal(timestart,timeend,e,f);
+                        }
+//                        Toast.makeText(context,"download jadwal berhasil 1",Toast.LENGTH_SHORT).show();
+                        launch();
+                        ((fingerPrintauth)context).finish();
+                    }
+                }
+                @Override
+                public void onFailure(Call<List<jadwalGet>> call, Throwable t) {
+                    Toast.makeText(context,"download failed",Toast.LENGTH_LONG).show();
+                }
+            });
+        }
+
 
     }
 

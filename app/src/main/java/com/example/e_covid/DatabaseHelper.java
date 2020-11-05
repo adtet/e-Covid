@@ -49,9 +49,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         else
             return c;
     }
-    public Integer delete(String a){
-        SQLiteDatabase read = this.getReadableDatabase();
-        return read.delete("data_id","id=?",new String[]{a});
+
+    public void delete_jadwal(){
+        SQLiteDatabase  read = this.getWritableDatabase();
+        read.execSQL("delete from jadwal");
     }
     public Boolean insert_jadwal(String a, String b,String c,String d){
         SQLiteDatabase db = this.getWritableDatabase();
@@ -64,13 +65,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         if(ins==-1)return  false;
         else return true;
     }
-    public Integer delete_jadwal(){
-        SQLiteDatabase db = this.getWritableDatabase();
-        return db.delete("jadwal",null,null);
-    }
-    public Boolean check_jadwal(String a,String b){
+
+    public Boolean check_jadwal(){
         SQLiteDatabase db =  this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("select * from jadwal where matakuliah=? and dosen=?",new String[]{a,b});
+        Cursor cursor = db.rawQuery("select * from jadwal ",null);
         if(cursor.getCount()>0){
             return false;
         }
