@@ -39,7 +39,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
     public String ambil_id(){
         SQLiteDatabase read = this.getReadableDatabase();
-        Cursor cursor = read.rawQuery("select * from data_id" ,null);
+        Cursor cursor = read.rawQuery("select id from data_id" ,null);
         String c = null;
         cursor.moveToFirst();
         if(cursor.getCount()>0){

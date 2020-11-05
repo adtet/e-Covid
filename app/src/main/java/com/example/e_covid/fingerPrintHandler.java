@@ -50,11 +50,13 @@ public class fingerPrintHandler extends FingerprintManager.AuthenticationCallbac
     @Override
     public void onAuthenticationSucceeded(FingerprintManager.AuthenticationResult result) {
         super.onAuthenticationSucceeded(result);
-        this.notif("Autentikasi sukses"+result);
+        this.notif("Autentikasi sukses");
         db = new DatabaseHelper(this.context);
         String id = db.ambil_id();
+        Toast.makeText(context,id,Toast.LENGTH_LONG).show();
         get_jadwal(id);
         launch();
+        ((fingerPrintauth)context).finish();
 
     }
 

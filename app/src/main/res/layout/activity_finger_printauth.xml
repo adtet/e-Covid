@@ -1,43 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fingerPrintauth">
+    tools:context=".fingerPrintauth"
+    android:background="@drawable/bg">
 
     <TextView
         android:id="@+id/textView"
+        android:layout_width="272dp"
+        android:layout_height="75dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:fontFamily="@font/krona_one"
+        android:gravity="center"
+        android:text="Auntentikasi Sidik Jari"
+        android:textColor="#FFFFFF"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.053" />
+
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="77dp"
-        android:fontFamily="@font/comfortaa_bold"
-        android:text="Auntentikasi Sidik Jari"
-        android:textColor="#000000"
-        android:textSize="24sp" />
+        android:background="@drawable/ic_group_16"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="278dp"
-        android:layout_height="280dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="38dp"
-        android:layout_marginTop="144dp"
-        android:background="@drawable/ic_fingerprint_outline_variant" />
+        <TextView
+            android:id="@+id/notif_finger_print_auth"
+            android:layout_width="232dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/krona_one"
+            android:gravity="center"
+            android:text="Letakkan jari anda pada scanner untuk diproses"
+            android:textColor="#2BA6DB"
+            android:textSize="10sp" />
 
-    <TextView
-        android:id="@+id/notif_finger_print_auth"
-        android:layout_width="311dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="22dp"
-        android:layout_marginTop="470dp"
-        android:fontFamily="@font/comfortaa_bold"
-        android:text="Letakkan jari anda pada scanner untuk diproses"
-        android:textColor="#938C8C" />
-</RelativeLayout>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="74dp"
+            android:layout_marginTop="75dp"
+            android:background="@drawable/logo_fingerprint" />
+    </RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
