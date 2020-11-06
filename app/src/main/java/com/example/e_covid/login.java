@@ -84,7 +84,7 @@ public class login extends AppCompatActivity {
                                     pass.setText("");
 //                            get_jadwal(a);
                                     progressBar.setVisibility(View.GONE);
-                                    startActivity(new Intent(login.this,fingerPrintauth.class));
+                                    startActivity(new Intent(login.this,mini_menu.class));
                                     finish();
                                 }
                                 else{

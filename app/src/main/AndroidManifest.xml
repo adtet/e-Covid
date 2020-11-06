@@ -13,7 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".alternatif_fingerprint"></activity>
+        <activity android:name=".mini_menu"></activity>
+        <activity android:name=".alternatif_fingerprint" />
         <activity android:name=".showJadwal" />
         <activity android:name=".after_splash" />
         <activity android:name=".masuk_kelas" />

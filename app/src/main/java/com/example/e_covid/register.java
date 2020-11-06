@@ -55,19 +55,32 @@ public class register extends AppCompatActivity {
                         call.enqueue(new Callback<com.example.e_covid.registPost>() {
                             @Override
                             public void onResponse(Call<com.example.e_covid.registPost> call, Response<com.example.e_covid.registPost> response) {
-                                Toast.makeText(getApplicationContext(),"regist berhasil",Toast.LENGTH_LONG).show();
+//                                Toast.makeText(getApplicationContext(),"regist berhasil",Toast.LENGTH_SHORT).show();
                                 registPost registPost1 = response.body();
                                 String pesan = registPost1.getMessage();
                                 Toast.makeText(getApplicationContext(),pesan,Toast.LENGTH_SHORT).show();
-                                nim.setText("");
-                                nama.setText("");
-                                prodi.setText("");
-                                jurusan.setText("");
-                                kelas.setText("");
-                                email.setText("");
-                                pass.setText("");
-                                startActivity(new Intent(register.this,login.class));
-                                onBackPressed();
+
+                                if(pesan.equals("Regist Berhasil")){
+                                    nim.setText("");
+                                    nama.setText("");
+                                    prodi.setText("");
+                                    jurusan.setText("");
+                                    kelas.setText("");
+                                    email.setText("");
+                                    pass.setText("");
+                                    confpass.setText("");
+                                    onBackPressed();
+                                }
+                                else{
+                                    nim.setText("");
+                                    nama.setText("");
+                                    prodi.setText("");
+                                    jurusan.setText("");
+                                    kelas.setText("");
+                                    email.setText("");
+                                    pass.setText("");
+                                    confpass.setText("");
+                                }
                             }
                             @Override
                             public void onFailure(Call<com.example.e_covid.registPost> call, Throwable t) {
@@ -87,6 +100,7 @@ public class register extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+        startActivity(new Intent(register.this,login.class));
         finish();
     }
 }
