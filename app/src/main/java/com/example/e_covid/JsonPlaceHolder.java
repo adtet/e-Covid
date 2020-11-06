@@ -19,4 +19,7 @@ public interface JsonPlaceHolder {
     Call<absenPost>getabsenPost(@Path("id") String getPath);
     @POST("schedule")
     Call<List<jadwalGet>>getjadwalGet(@Body jadwalPost jadwalPost);
+    @GET("welcome")
+    Call<welcomeGet>getWelcome();
+
 }
