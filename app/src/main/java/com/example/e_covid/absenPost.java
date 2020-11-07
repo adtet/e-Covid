@@ -1,10 +1,12 @@
 package com.example.e_covid;
 
 public class absenPost {
+    public String id;
     public String link;
-
-    public absenPost (String Link){
-        this.link = Link;
+    public String matakuliah;
+    public absenPost (String id,String matakuliah){
+        this.id = id;
+        this.matakuliah = matakuliah;
     }
 
     public String getLink() {

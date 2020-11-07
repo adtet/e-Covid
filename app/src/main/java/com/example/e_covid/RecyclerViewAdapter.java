@@ -60,8 +60,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(context,masuk_kelas.class);
-                i.putExtra("start",start);
+                i.putExtra("matakuliah",matakuliah);
                 context.startActivity(i);
+                ((showJadwal)context).finish();
             }
         });
     }

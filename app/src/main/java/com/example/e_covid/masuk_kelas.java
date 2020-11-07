@@ -23,7 +23,8 @@ public class masuk_kelas extends AppCompatActivity {
         link = findViewById(R.id.txtlinkmasukkelas);
         db = new DatabaseHelper(this);
         String id = db.ambil_id();
-        final absenPost absenPost= new absenPost(id);
+        String matakuliah = getIntent().getStringExtra("matakuliah");
+        final absenPost absenPost= new absenPost(id,matakuliah);
         final Retrofit retrofit = new Retrofit.Builder().baseUrl(url).addConverterFactory(GsonConverterFactory.create()).build();
         JsonPlaceHolder jsonPlaceHolder = retrofit.create(JsonPlaceHolder.class);
         Call<absenPost>call = jsonPlaceHolder.getabsenPost(id);

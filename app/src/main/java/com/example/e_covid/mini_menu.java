@@ -20,7 +20,7 @@ public class mini_menu extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(mini_menu.this,fingerPrintauth.class));
-                onBackPressed();
+
             }
         });
         offline.setOnClickListener(new View.OnClickListener() {

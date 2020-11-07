@@ -39,12 +39,14 @@ public class fingerPrintHandler extends FingerprintManager.AuthenticationCallbac
     public void onAuthenticationError(int errorCode, CharSequence errString) {
         super.onAuthenticationError(errorCode, errString);
         this.notif("Terdapat error authentikasi : "+errString);
+        launch2();
     }
 
     @Override
     public void onAuthenticationHelp(int helpCode, CharSequence helpString) {
         super.onAuthenticationHelp(helpCode, helpString);
         this.notif("Error : "+helpString);
+        launch2();
     }
 
     @Override
@@ -71,6 +73,11 @@ public class fingerPrintHandler extends FingerprintManager.AuthenticationCallbac
     private void launch(){
         this.context.startActivity(new Intent(this.context,showJadwal.class));
     }
+    private void launch2(){
+        this.context.startActivity(new Intent(this.context,alternatif_fingerprint.class));
+        ((fingerPrintauth)context).finish();
+
+    }
     private void finish(){
         this.finish();
     }
@@ -91,7 +98,8 @@ public class fingerPrintHandler extends FingerprintManager.AuthenticationCallbac
                     }
                     List<jadwalGet> jadwalGets = response.body();
                     if (jadwalGets.isEmpty()){
-//                        Toast.makeText(context,"Jadwal Kosong",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context,"Jadwal Kosong",Toast.LENGTH_SHORT).show();
+                        ((fingerPrintauth)context).finish();
                     }
                     else{
                         for(jadwalGet jadwalGet:jadwalGets){
@@ -133,7 +141,8 @@ public class fingerPrintHandler extends FingerprintManager.AuthenticationCallbac
                     }
                     List<jadwalGet> jadwalGets = response.body();
                     if (jadwalGets.isEmpty()){
-//                        Toast.makeText(context,"Jadwal Kosong",Toast.LENGTH_LONG).show();
+                        Toast.makeText(context,"Jadwal Kosong",Toast.LENGTH_LONG).show();
+                        ((fingerPrintauth)context).finish();
                     }
                     else{
                         for(jadwalGet jadwalGet:jadwalGets){

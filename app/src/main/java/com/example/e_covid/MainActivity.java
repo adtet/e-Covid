@@ -43,15 +43,12 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this,login.class));
                 onBackPressed();
             }
-
             @Override
             public void onFailure(Call<welcomeGet> call, Throwable t) {
                 Toast.makeText(getApplicationContext(),"Lost Connection",Toast.LENGTH_SHORT).show();
-
             }
         });
     }
-
     @Override
     public void onBackPressed() {
         super.onBackPressed();

@@ -41,7 +41,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase read = this.getReadableDatabase();
         Cursor cursor = read.rawQuery("select id from data_id" ,null);
         String c = null;
-        cursor.moveToFirst();
+        cursor.moveToLast();
         if(cursor.getCount()>0){
             c = cursor.getString(0);
             return c;
