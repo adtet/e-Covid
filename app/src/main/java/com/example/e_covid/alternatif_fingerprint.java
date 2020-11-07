@@ -30,16 +30,16 @@ public class alternatif_fingerprint extends AppCompatActivity {
         confirm = findViewById(R.id.btnconfimralternatif);
         email = findViewById(R.id.emailalternatif);
         pass = findViewById(R.id.passalternatif);
-        final String eml = email.getText().toString();
-        final String pswd = pass.getText().toString();
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(eml.equals("")&&pswd.equals("")){
+                if(email.getText().toString().equals("")&&pass.getText().toString().equals("")){
                     Toast.makeText(getApplicationContext(),"Lengkapi data",Toast.LENGTH_SHORT).show();
                 }
                 else{
-
+                    masuk(email.getText().toString(),pass.getText().toString());
+                    email.setText("");
+                    pass.setText("");
                 }
             }
         });

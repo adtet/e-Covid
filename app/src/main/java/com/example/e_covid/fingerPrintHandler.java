@@ -64,6 +64,7 @@ public class fingerPrintHandler extends FingerprintManager.AuthenticationCallbac
     public void onAuthenticationFailed() {
         super.onAuthenticationFailed();
         this.notif("Autentikasi gagal");
+        launch2();
 
     }
     private void notif(String s){
