@@ -21,5 +21,7 @@ public interface JsonPlaceHolder {
     Call<List<jadwalGet>>getjadwalGet(@Body jadwalPost jadwalPost);
     @GET("welcome")
     Call<welcomeGet>getWelcome();
+    @POST("history")
+    Call<List<getCekdata>>getCekdata(@Body getCekdata getCekdata);
 
 }

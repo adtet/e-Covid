@@ -18,13 +18,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("create table data_id (id varchar(100),email varchar(100),kelas varchar(100))");
         db.execSQL("create table jadwal (timestart varchar(10),timeend varchar(10),matakuliah varchar(50),dosen varchar(50))");
-
+        db.execSQL("create table history(day varchar(50),date varchar(50),matakuliah varchar(50),dosen varchar(50),waktukehadiran varchar(50),keterangan varchar(50))");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("drop table if exists data_id");
         db.execSQL("drop table if exists jadwal");
+        db.execSQL("drop table if exists history");
     }
 
     public Boolean insert1(String a, String b,String c){
@@ -75,8 +76,29 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         else{
             return true;
         }
-
-
+    }
+    public Boolean check_history(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("select * from history",null);
+        if(cursor.getCount()>0) return false;
+        else return true;
+    }
+    public Boolean insert_history(String a,String b,String c,String d,String e,String f){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("day",a);
+        contentValues.put("date",b);
+        contentValues.put("matakuliah",c);
+        contentValues.put("dosen",d);
+        contentValues.put("waktukehadiran",e);
+        contentValues.put("keterangan",f);
+        long ins = db.insert("history",null,contentValues);
+        if(ins==-1)return false;
+        else return true;
+    }
+    public void delete_history(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        db.execSQL("delete from history");
     }
 
 

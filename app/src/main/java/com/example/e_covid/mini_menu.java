@@ -32,7 +32,7 @@ public class mini_menu extends AppCompatActivity {
         cekdata.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                startActivity(new Intent(mini_menu.this,after_splash.class));
             }
         });
     }
