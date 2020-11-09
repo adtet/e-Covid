@@ -40,6 +40,7 @@ public class alternatif_fingerprint extends AppCompatActivity {
                     masuk(email.getText().toString(),pass.getText().toString());
                     email.setText("");
                     pass.setText("");
+                    onBackPressed();
                 }
             }
         });

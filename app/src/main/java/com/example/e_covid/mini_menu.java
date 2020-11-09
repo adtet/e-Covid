@@ -19,7 +19,7 @@ public class mini_menu extends AppCompatActivity {
         online.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(mini_menu.this,fingerPrintauth.class));
+                startActivity(new Intent(mini_menu.this,Biometric_auth.class));
 
             }
         });
