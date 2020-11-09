@@ -15,8 +15,8 @@ public interface JsonPlaceHolder {
     Call<loginPost>getloginPost(@Body loginPost loginPost);
     @POST("regist")
     Call<registPost>getregistPost(@Body registPost registPost);
-    @POST("{id}")
-    Call<absenPost>getabsenPost(@Path("id") String getPath);
+    @POST("absen")
+    Call<absenPost>getabsenPost(@Body absenPost absenPost);
     @POST("schedule")
     Call<List<jadwalGet>>getjadwalGet(@Body jadwalPost jadwalPost);
     @GET("welcome")
