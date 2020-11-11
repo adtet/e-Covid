@@ -7,7 +7,7 @@
     tools:context=".register"
     android:background="@drawable/bg">
 
-    <EditText
+    <AutoCompleteTextView
         android:id="@+id/txtprodiregsiter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -24,7 +24,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
+    <AutoCompleteTextView
         android:id="@+id/txtjurusanregister"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -42,7 +42,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.426" />
 
-    <EditText
+    <AutoCompleteTextView
         android:id="@+id/txtkelasregister"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

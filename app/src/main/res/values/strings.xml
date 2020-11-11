@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">e-Covid</string>
+
+    <string-array name="prodis">
+        <item>D4-Teknik Telekomunikasi</item>
+        <item>D3-Teknik Telekomunikasi</item>
+    </string-array>
+    <string-array name="jurusans">
+        <item>Elektro</item>
+    </string-array>
+    <string-array name="kelass">
+        <item>3nk</item>
+        <item>3b</item>
+        <item>3a</item>
+    </string-array>
 </resources>

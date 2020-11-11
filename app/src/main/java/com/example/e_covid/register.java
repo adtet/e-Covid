@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -17,18 +19,31 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class register extends AppCompatActivity {
-    EditText nim,nama,jurusan,prodi,kelas,email,pass,confpass;
+    EditText nim,nama,email,pass,confpass;
+    AutoCompleteTextView prodi,jurusan,kelas;
     ImageButton register;
     public String url = "http://156.67.221.101:4000/user/";
+    private static final String[] prodis = new String[]{"D4-Teknik Telekomunikasi","D3-Teknik Telekomunikasi"};
+    private static final String[]jurusans = new String[]{"Elektro"};
+    private static final String[]kelass = new String[]{"3nk","3b","3a"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+        String[] prodies = getResources().getStringArray(R.array.prodis);
+        String[] jurusanes = getResources().getStringArray(R.array.jurusans);
+        String[] kelases = getResources().getStringArray(R.array.kelass);
         nim = findViewById(R.id.txtnimregister);
         nama = findViewById(R.id.txtnamaregister);
         prodi = findViewById(R.id.txtprodiregsiter);
+        ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(this,R.layout.custom_list_item,R.id.text_view_list_item,prodies);
+        prodi.setAdapter(adapter1);
+        ArrayAdapter<String>adapter2 = new ArrayAdapter<String>(this,R.layout.custom_list_item,R.id.text_view_list_item,jurusanes);
         jurusan = findViewById(R.id.txtjurusanregister);
+        jurusan.setAdapter(adapter2);
         kelas = findViewById(R.id.txtkelasregister);
+        ArrayAdapter<String> adapter3 = new ArrayAdapter<String>(this,R.layout.custom_list_item,R.id.text_view_list_item,kelases);
+        kelas.setAdapter(adapter3);
         email = findViewById(R.id.txtemailregister);
         pass = findViewById(R.id.txtpassregister);
         confpass = findViewById(R.id.txtconfirmpassregister);
