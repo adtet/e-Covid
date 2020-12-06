@@ -77,19 +77,34 @@ public class login extends AppCompatActivity {
                                 pass.setText("");
                             }
                             else{
-                                Boolean ins = db.insert1(a,email.getText().toString(),b);
-                                if(ins==true){
-//                                    Toast.makeText(getApplicationContext(),"ID : "+a+" berhasil Login",Toast.LENGTH_LONG).show();
-                                    email.setText("");
-                                    pass.setText("");
-//                            get_jadwal(a);
-                                    progressBar.setVisibility(View.GONE);
-                                    startActivity(new Intent(login.this,mini_menu.class));
-                                    finish();
+                                Boolean check_data1 = db.check_user();
+                                if (check_data1==true){
+                                    Boolean check_data2 = db.check_data_id(a,email.getText().toString(),b);
+                                    if(check_data2==true){
+                                        email.setText("");
+                                        pass.setText("");
+                                        progressBar.setVisibility(View.GONE);
+                                        startActivity(new Intent(login.this,mini_menu.class));
+                                        finish();
+                                    }
+                                    else{
+                                        Toast.makeText(getApplicationContext(),"Hanya dapat login dengan 1 data user",Toast.LENGTH_SHORT).show();
+                                    }
                                 }
                                 else{
-                                    Toast.makeText(getApplicationContext(),"LOL",Toast.LENGTH_LONG).show();
+                                    Boolean ins = db.insert1(a,email.getText().toString(),b);
+                                    if(ins==true){
+                                        email.setText("");
+                                        pass.setText("");
+                                        progressBar.setVisibility(View.GONE);
+                                        startActivity(new Intent(login.this,mini_menu.class));
+                                        finish();
+                                    }
+                                    else{
+                                        Toast.makeText(getApplicationContext(),"LOL",Toast.LENGTH_LONG).show();
+                                    }
                                 }
+
                             }
 
                         }

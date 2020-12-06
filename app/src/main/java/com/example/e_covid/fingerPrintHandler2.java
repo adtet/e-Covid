@@ -1,15 +1,21 @@
 package com.example.e_covid;
 
+import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.Build;
 import android.os.CancellationSignal;
+import android.provider.Settings;
+import android.telephony.SmsManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
+import androidx.core.app.ActivityCompat;
 
 import java.util.List;
 
@@ -19,14 +25,14 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-@RequiresApi(api = Build.VERSION_CODES.M)
-public class fingerPrintHandler extends FingerprintManager.AuthenticationCallback {
 
+@RequiresApi(api = Build.VERSION_CODES.M)
+public class fingerPrintHandler2 extends FingerprintManager.AuthenticationCallback {
 
     private Context context;
     private DatabaseHelper db;
-    private String url1 = "http://156.67.221.101:4000/";
-    public fingerPrintHandler(Context context){
+    private String url2 = "http://156.67.221.101:4000/";
+    public fingerPrintHandler2(Context context){
         this.context = context;
     }
 
@@ -38,31 +44,31 @@ public class fingerPrintHandler extends FingerprintManager.AuthenticationCallbac
     @Override
     public void onAuthenticationError(int errorCode, CharSequence errString) {
         super.onAuthenticationError(errorCode, errString);
-        this.notif("Terdapat error authentikasi : "+errString);
+        this.notif("Terdapat error authentifikasi :"+errString);
         launch2();
     }
+
     @Override
     public void onAuthenticationHelp(int helpCode, CharSequence helpString) {
         super.onAuthenticationHelp(helpCode, helpString);
         this.notif("Error : "+helpString);
         launch2();
     }
+
     @Override
     public void onAuthenticationSucceeded(FingerprintManager.AuthenticationResult result) {
         super.onAuthenticationSucceeded(result);
-        this.notif("Autentikasi sukses");
         db = new DatabaseHelper(this.context);
         String id = db.ambil_id();
-//        Toast.makeText(context,id,Toast.LENGTH_LONG).show();
         get_jadwal(id);
     }
+
     @Override
     public void onAuthenticationFailed() {
         super.onAuthenticationFailed();
-        this.notif("Autentikasi gagal");
     }
     private void notif(String s){
-        TextView label = (TextView)((Activity)context).findViewById(R.id.notif_finger_print_auth);
+        TextView label = (TextView)((Activity)context).findViewById(R.id.notif2_finger_print_auth);
         label.setText(s);
     }
     private void launch(){
@@ -70,14 +76,12 @@ public class fingerPrintHandler extends FingerprintManager.AuthenticationCallbac
     }
     private void launch2(){
         this.context.startActivity(new Intent(this.context,alternatif_fingerprint.class));
-        ((fingerPrintauth)context).finish();
+        ((fingerPrintauth2)context).finish();
 
     }
-    private void finish(){
-        this.finish();
-    }
-    public void get_jadwal(String a){
-        final Retrofit retrofit = new Retrofit.Builder().baseUrl(url1).addConverterFactory(GsonConverterFactory.create()).build();
+
+    private void get_jadwal(String a){
+        final Retrofit retrofit = new Retrofit.Builder().baseUrl(url2).addConverterFactory(GsonConverterFactory.create()).build();
         db = new DatabaseHelper(this.context);
         JsonPlaceHolder jsonPlaceHolder = retrofit.create(JsonPlaceHolder.class);
         final jadwalPost jadwalPost = new jadwalPost(a);

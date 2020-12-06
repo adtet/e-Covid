@@ -27,7 +27,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("drop table if exists jadwal");
         db.execSQL("drop table if exists history");
     }
-
     public Boolean insert1(String a, String b,String c){
         SQLiteDatabase read = this.getReadableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -50,7 +49,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         else
             return c;
     }
-
     public void delete_jadwal(){
         SQLiteDatabase  read = this.getWritableDatabase();
         read.execSQL("delete from jadwal");
@@ -100,9 +98,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         db.execSQL("delete from history");
     }
-
-
-
-
+    public Boolean check_user(){
+        SQLiteDatabase read = this.getReadableDatabase();
+        Cursor cursor = read.rawQuery("select * from data_id",null);
+        if(cursor.getCount()>0) return true;
+        else return false;
+    }
+    public Boolean check_data_id(String a,String b,String c){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("select * from data_id where id=? and email=? and kelas=?",new String[]{a,b,c});
+        if(cursor.getCount()>0) return  true;
+        else return false;
+    }
 
 }

@@ -1,5 +1,7 @@
 package com.example.e_covid;
 
+import android.os.CancellationSignal;
+
 import java.util.List;
 
 import retrofit2.Call;
@@ -23,5 +25,7 @@ public interface JsonPlaceHolder {
     Call<welcomeGet>getWelcome();
     @POST("history")
     Call<List<getCekdata>>getCekdata(@Body getCekdata getCekdata);
+    @POST("location")
+    Call<locationPost>getLocationPost(@Body locationPost locationPost);
 
 }
