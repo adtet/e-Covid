@@ -7,6 +7,14 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -16,7 +24,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".masuk_kelas2"></activity>
+        <activity android:name=".fingerPrintAuth3"></activity>
+        <activity android:name=".showJadwal3" />
+        <activity android:name=".take_pict_surat" />
+        <activity android:name=".masuk_kelas2" />
         <activity android:name=".keterangan_absensi" />
         <activity android:name=".showJadwal2" />
         <activity android:name=".fingerPrintauth2" />
@@ -29,6 +40,17 @@
         <activity android:name=".login" />
         <activity android:name=".register" />
         <activity android:name=".fingerPrintauth" />
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.example.e_covid.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
