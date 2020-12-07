@@ -67,47 +67,55 @@ public class fingerPrintauth2 extends AppCompatActivity {
         txtlong = findViewById(R.id.longFA);
         txtlat = findViewById(R.id.latFA);
         txtpesan = findViewById(R.id.pesanFA);
+        ActivityCompat.requestPermissions( this,
+                new String[] {Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION);
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         if(!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)){
             OnGPS();
         }
         else{
             getLocation();
-            float lat = Float.parseFloat(txtlat.getText().toString());
-            float lon = Float.parseFloat(txtlong.getText().toString());
-            cek_lokasi(lat,lon);
-            Boolean cek = ada_ga_lokasi(txtpesan.getText().toString());
-            if (cek==true){
-                if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
-                    fingerprintManager = (FingerprintManager) getSystemService(FINGERPRINT_SERVICE);
-                    keyguardManager  = (KeyguardManager) getSystemService(KEYGUARD_SERVICE);
+            if(txtlat.getText().equals("Text View")){
+                Toast.makeText(getApplicationContext(),"cek permission GPS",Toast.LENGTH_SHORT).show();
+            }
+            else{
+                float lat = Float.parseFloat(txtlat.getText().toString());
+                float lon = Float.parseFloat(txtlong.getText().toString());
+                cek_lokasi(lat,lon);
+                Boolean cek = ada_ga_lokasi(txtpesan.getText().toString());
+                if (cek==true){
+                    if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                        fingerprintManager = (FingerprintManager) getSystemService(FINGERPRINT_SERVICE);
+                        keyguardManager  = (KeyguardManager) getSystemService(KEYGUARD_SERVICE);
 
-                    if(!fingerprintManager.isHardwareDetected()){
-                        notifikasi.setText("Scanner sidik jari tidak terdeteksi");
-                    }
-                    else if(ContextCompat.checkSelfPermission(this, Manifest.permission.USE_FINGERPRINT)!= PackageManager.PERMISSION_GRANTED){
-                        notifikasi.setText("Tidak dapat izin menggunakan Scanner sidik jari");
-                    }
-                    else if(!keyguardManager.isKeyguardSecure()){
-                        notifikasi.setText("Tambahkan pengunci pada HP anda");
-                    }
-                    else if(!fingerprintManager.hasEnrolledFingerprints()){
-                        notifikasi.setText("Kamu harus menempatkan paling sedikit 1 sidik jari pada fitur ini");
-                    }
-                    else{
-                        notifikasi.setText("Letakkan sidik jari anda pada Scanner agar dapat mengakses aplikasi");
-                        generateKey();
-                        if (chiperInit()){
+                        if(!fingerprintManager.isHardwareDetected()){
+                            notifikasi.setText("Scanner sidik jari tidak terdeteksi");
+                        }
+                        else if(ContextCompat.checkSelfPermission(this, Manifest.permission.USE_FINGERPRINT)!= PackageManager.PERMISSION_GRANTED){
+                            notifikasi.setText("Tidak dapat izin menggunakan Scanner sidik jari");
+                        }
+                        else if(!keyguardManager.isKeyguardSecure()){
+                            notifikasi.setText("Tambahkan pengunci pada HP anda");
+                        }
+                        else if(!fingerprintManager.hasEnrolledFingerprints()){
+                            notifikasi.setText("Kamu harus menempatkan paling sedikit 1 sidik jari pada fitur ini");
+                        }
+                        else{
+                            notifikasi.setText("Letakkan sidik jari anda pada Scanner agar dapat mengakses aplikasi");
+                            generateKey();
+                            if (chiperInit()){
 
-                            FingerprintManager.CryptoObject cryptoObject = new FingerprintManager.CryptoObject(cipher);
-                            fingerPrintHandler2 fingerprintHandler = new fingerPrintHandler2(this);
-                            fingerprintHandler.startAuth(fingerprintManager, cryptoObject);
+                                FingerprintManager.CryptoObject cryptoObject = new FingerprintManager.CryptoObject(cipher);
+                                fingerPrintHandler2 fingerprintHandler = new fingerPrintHandler2(this);
+                                fingerprintHandler.startAuth(fingerprintManager, cryptoObject);
+                            }
                         }
                     }
+                }else{
+                    Toast.makeText(getApplicationContext(),"Lakukan absensi pada lokasi kampus Polban",Toast.LENGTH_SHORT).show();
                 }
-            }else{
-                Toast.makeText(getApplicationContext(),"Lakukan absensi pada lokasi kampus Polban",Toast.LENGTH_SHORT).show();
             }
+
         }
 
     }
@@ -199,6 +207,7 @@ public class fingerPrintauth2 extends AppCompatActivity {
                 longitude = String.valueOf(longi);
                 txtlat.setText(latitude);
                 txtlong.setText(longitude);
+//                Toast.makeText(getApplicationContext(),longitude+"/n"+latitude,Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(this, "Unable to find location.", Toast.LENGTH_SHORT).show();
             }
@@ -215,6 +224,7 @@ public class fingerPrintauth2 extends AppCompatActivity {
                 locationPost locationPost = response.body();
                 String pesan = locationPost.getPesan();
                 txtpesan.setText(pesan);
+                Toast.makeText(getApplicationContext(),pesan,Toast.LENGTH_SHORT).show();
             }
             @Override
             public void onFailure(Call<com.example.e_covid.locationPost> call, Throwable t) {

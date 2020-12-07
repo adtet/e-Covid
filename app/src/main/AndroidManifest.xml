@@ -16,7 +16,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".fingerPrintauth2"></activity>
+        <activity android:name=".masuk_kelas2"></activity>
+        <activity android:name=".keterangan_absensi" />
+        <activity android:name=".showJadwal2" />
+        <activity android:name=".fingerPrintauth2" />
         <activity android:name=".Biometric_auth" />
         <activity android:name=".mini_menu" />
         <activity android:name=".alternatif_fingerprint" />

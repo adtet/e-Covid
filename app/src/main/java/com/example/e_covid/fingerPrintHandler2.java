@@ -25,7 +25,6 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-
 @RequiresApi(api = Build.VERSION_CODES.M)
 public class fingerPrintHandler2 extends FingerprintManager.AuthenticationCallback {
 
@@ -54,32 +53,31 @@ public class fingerPrintHandler2 extends FingerprintManager.AuthenticationCallba
         this.notif("Error : "+helpString);
         launch2();
     }
-
     @Override
     public void onAuthenticationSucceeded(FingerprintManager.AuthenticationResult result) {
         super.onAuthenticationSucceeded(result);
+        this.notif("Autentikasi sukses");
         db = new DatabaseHelper(this.context);
         String id = db.ambil_id();
         get_jadwal(id);
     }
-
     @Override
     public void onAuthenticationFailed() {
         super.onAuthenticationFailed();
+        this.notif("Autentikasi gagal");
     }
     private void notif(String s){
         TextView label = (TextView)((Activity)context).findViewById(R.id.notif2_finger_print_auth);
         label.setText(s);
     }
     private void launch(){
-        this.context.startActivity(new Intent(this.context,showJadwal.class));
+        this.context.startActivity(new Intent(this.context,showJadwal2.class));
     }
     private void launch2(){
         this.context.startActivity(new Intent(this.context,alternatif_fingerprint.class));
         ((fingerPrintauth2)context).finish();
 
     }
-
     private void get_jadwal(String a){
         final Retrofit retrofit = new Retrofit.Builder().baseUrl(url2).addConverterFactory(GsonConverterFactory.create()).build();
         db = new DatabaseHelper(this.context);
@@ -98,7 +96,7 @@ public class fingerPrintHandler2 extends FingerprintManager.AuthenticationCallba
                     List<jadwalGet> jadwalGets = response.body();
                     if (jadwalGets.isEmpty()){
                         Toast.makeText(context,"Jadwal Kosong",Toast.LENGTH_SHORT).show();
-                        ((fingerPrintauth)context).finish();
+                        ((fingerPrintauth2)context).finish();
                     }
                     else{
                         for(jadwalGet jadwalGet:jadwalGets){
@@ -120,7 +118,7 @@ public class fingerPrintHandler2 extends FingerprintManager.AuthenticationCallba
                         }
 //                        Toast.makeText(context,"download jadwal berhasil",Toast.LENGTH_SHORT).show();
                         launch();
-                        ((fingerPrintauth)context).finish();
+                        ((fingerPrintauth2)context).finish();
                     }
                 }
                 @Override
@@ -141,7 +139,7 @@ public class fingerPrintHandler2 extends FingerprintManager.AuthenticationCallba
                     List<jadwalGet> jadwalGets = response.body();
                     if (jadwalGets.isEmpty()){
                         Toast.makeText(context,"Jadwal Kosong",Toast.LENGTH_LONG).show();
-                        ((fingerPrintauth)context).finish();
+                        ((fingerPrintauth2)context).finish();
                     }
                     else{
                         for(jadwalGet jadwalGet:jadwalGets){
@@ -163,7 +161,7 @@ public class fingerPrintHandler2 extends FingerprintManager.AuthenticationCallba
                         }
 //                        Toast.makeText(context,"download jadwal berhasil 1",Toast.LENGTH_SHORT).show();
                         launch();
-                        ((fingerPrintauth)context).finish();
+                        ((fingerPrintauth2)context).finish();
                     }
                 }
                 @Override

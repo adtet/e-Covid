@@ -7,7 +7,7 @@
     tools:context=".Biometric_auth"
     android:background="@drawable/bg">
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/txtindikatorkelasoffline"
         android:layout_width="272dp"
         android:layout_height="75dp"
         android:layout_alignParentStart="true"

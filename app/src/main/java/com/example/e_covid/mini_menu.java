@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.ImageButton;
 
 public class mini_menu extends AppCompatActivity {
-    ImageButton online,offline,cekdata;
+    ImageButton online,offline,cekdata,absen;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -16,23 +16,30 @@ public class mini_menu extends AppCompatActivity {
         online = findViewById(R.id.btnonlinemenu);
         offline = findViewById(R.id.btnofflinemenu);
         cekdata = findViewById(R.id.btncekdatamenu);
+        absen = findViewById(R.id.btnabsenmenu);
         online.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(mini_menu.this,Biometric_auth.class));
+                startActivity(new Intent(mini_menu.this,fingerPrintauth.class));
 
             }
         });
         offline.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                startActivity(new Intent(mini_menu.this,fingerPrintauth2.class));
             }
         });
         cekdata.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(mini_menu.this,after_splash.class));
+            }
+        });
+        absen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(mini_menu.this,keterangan_absensi.class));
             }
         });
     }
