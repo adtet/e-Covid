@@ -32,6 +32,7 @@ import java.util.Locale;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -168,9 +169,8 @@ public class take_pict_surat extends AppCompatActivity {
         db = new DatabaseHelper(this);
         if(requestCode==CAPTURE_IMAGE_REQUEST && resultCode==RESULT_OK){
             Bitmap myBitmap = BitmapFactory.decodeFile(photofile.getAbsolutePath());
-
             imageView.setImageBitmap(myBitmap);
-
+            upload_gambar(id);
 
         }
         else{
@@ -188,22 +188,23 @@ public class take_pict_surat extends AppCompatActivity {
             }
         }
     }
-    public void upload_gambar(Bitmap a,String b){
+    public void upload_gambar(String b){
         RequestBody reqfile = RequestBody.create(MediaType.parse(b),photofile);
         MultipartBody.Part body = MultipartBody.Part.createFormData("file",photofile.getName(),reqfile);
-        Retrofit retrofit2 = new Retrofit.Builder().baseUrl("http://156.67.221.101:6002/").addConverterFactory(GsonConverterFactory.create()).build();
-        JsonPlaceHolder jsonPlaceHolder2 = retrofit2.create(JsonPlaceHolder.class);
-        Call<Response>call2 =  jsonPlaceHolder2.uploadimage(body);
-        call2.enqueue(new Callback<Response>() {
+        Retrofit retro = new Retrofit.Builder().baseUrl("http://156.67.221.101:6002/").addConverterFactory(GsonConverterFactory.create()).build();
+        JsonPlaceHolder jsonPlaceHolder2 = retro.create(JsonPlaceHolder.class);
+        Call<ResponseBody>call2 =  jsonPlaceHolder2.uploadimage(body);
+        call2.enqueue(new Callback<ResponseBody>() {
             @Override
-            public void onResponse(Call<Response> call, Response<Response> response) {
-                displayMessage(getApplicationContext(),"upload sukses "+photofile.getName());
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                Toast.makeText(getApplicationContext(),"upload berhasil",Toast.LENGTH_SHORT).show();
             }
 
             @Override
-            public void onFailure(Call<Response> call, Throwable t) {
-                displayMessage(getApplicationContext(),"gagal upload");
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Toast.makeText(getApplicationContext(),"lost connection",Toast.LENGTH_SHORT).show();
             }
         });
+
     }
 }

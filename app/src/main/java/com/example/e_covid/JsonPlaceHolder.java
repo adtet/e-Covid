@@ -5,11 +5,13 @@ import android.os.CancellationSignal;
 import java.util.List;
 
 import okhttp3.MultipartBody;
+import okhttp3.Response;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
-import retrofit2.Response;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.HTTP;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
 import retrofit2.http.Path;
@@ -32,7 +34,8 @@ public interface JsonPlaceHolder {
     Call<locationPost>getLocationPost(@Body locationPost locationPost);
     @POST("izin")
     Call<izinPost>getIzinPost(@Body izinPost izinPost);
+    @Multipart
     @POST("uploadfile")
-    Call<Response>uploadimage(@Part MultipartBody.Part file);
+    Call<ResponseBody>uploadimage(@Part MultipartBody.Part body);
 
 }

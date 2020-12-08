@@ -69,7 +69,9 @@ public class fingerPrintHandler extends FingerprintManager.AuthenticationCallbac
         this.context.startActivity(new Intent(this.context,showJadwal.class));
     }
     private void launch2(){
-        this.context.startActivity(new Intent(this.context,alternatif_fingerprint.class));
+        Intent i = new Intent(this.context,alternatif_fingerprint.class);
+        i.putExtra("pesan",1);
+        this.context.startActivity(i);
         ((fingerPrintauth)context).finish();
 
     }

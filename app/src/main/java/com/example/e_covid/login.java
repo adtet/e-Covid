@@ -88,6 +88,9 @@ public class login extends AppCompatActivity {
                                         finish();
                                     }
                                     else{
+                                        email.setText("");
+                                        pass.setText("");
+                                        progressBar.setVisibility(View.GONE);
                                         Toast.makeText(getApplicationContext(),"Hanya dapat login dengan 1 data user",Toast.LENGTH_SHORT).show();
                                     }
                                 }

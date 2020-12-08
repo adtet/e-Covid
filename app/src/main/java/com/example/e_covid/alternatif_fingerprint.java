@@ -103,6 +103,8 @@ public class alternatif_fingerprint extends AppCompatActivity {
                             db.insert_jadwal(timestart,timeend,e,f);
                         }
 //                        Toast.makeText(context,"download jadwal berhasil",Toast.LENGTH_SHORT).show();
+                        String pesan = getIntent().getStringExtra("pesan");
+
                         startActivity(new Intent(alternatif_fingerprint.this,showJadwal.class));
                         onBackPressed();
                     }
