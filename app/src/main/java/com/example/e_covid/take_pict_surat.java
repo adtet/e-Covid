@@ -153,7 +153,7 @@ public class take_pict_surat extends AppCompatActivity {
     }
     private File createImageFile() throws IOException {
         String timeStamp = new SimpleDateFormat("yyyy_MM",Locale.getDefault()).format(new Date());
-        String imageFileName = "Suratsakit"+id+"_"+"_"+matakuliah+"_"+dosen+"_"+timeStamp+"_";
+        String imageFileName = "Surat_Izin_"+id+"_"+"_"+matakuliah+"_"+dosen+"_"+timeStamp+"_";
         File storageDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),IMAGE_DIRECTORY_NAME);
         storageDir.mkdir();
         File image = File.createTempFile(imageFileName,".jpg",storageDir);
