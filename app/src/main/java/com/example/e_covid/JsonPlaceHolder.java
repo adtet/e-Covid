@@ -37,5 +37,7 @@ public interface JsonPlaceHolder {
     @Multipart
     @POST("uploadfile")
     Call<ResponseBody>uploadimage(@Part MultipartBody.Part body);
+    @POST("sakit")
+    Call<sakitPost>getSakitPost(@Body sakitPost sakitPost);
 
 }

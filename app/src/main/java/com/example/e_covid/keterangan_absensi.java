@@ -19,7 +19,7 @@ public class keterangan_absensi extends AppCompatActivity {
         sakit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(keterangan_absensi.this,fingerPrintAuth3.class));
+                startActivity(new Intent(keterangan_absensi.this,fingerPrintauth4.class));
                 onBackPressed();
             }
         });

@@ -48,7 +48,7 @@ public class RecyclerViewAdapter5 extends RecyclerView.Adapter<RecyclerViewAdapt
         holder.layoutShow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(context,take_pict_surat.class);
+                Intent i = new Intent(context,take_pict_surat2.class);
                 i.putExtra("matakuliah",matakuliah);
                 i.putExtra("dosen",dosen);
                 context.startActivity(i);
